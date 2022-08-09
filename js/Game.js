@@ -157,7 +157,7 @@ class Game {
 
 
     if (allPlayers !== undefined) {
-      image(track, 7, -height * 3, width, height * 10);
+      image(track, 7, -height * 3, width, height * 6);
 
       
 
@@ -234,7 +234,7 @@ class Game {
       // Finshing Line
       const finshLine = height * 4 - 5;
 
-      if (player.positionY > 2550) {
+      if (player.positionY > 2430) {
         gameState = 2;
         player.rank += 1;
         Player.updateCarsAtEnd(player.rank);
@@ -516,8 +516,24 @@ if(index === 2){
       imageUrl:
         "https://raw.githubusercontent.com/vishalgaddam873/p5-multiplayer-car-race-game/master/assets/cup.png",
       imageSize: "100x100",
-      confirmButtonText: "Ok"
-    });
+      confirmButtonText: "NEW GAME"
+    },
+    
+    function(isConfirm) {
+      if (isConfirm) {
+        
+        database.ref("/").set({
+          playerCount: 0,
+          gameState: 0,
+          players: {},
+          carsAtEnd: 0
+        });
+        window.location.reload();
+
+      }
+    }
+    
+    );
   }
 
   gameOver() {
